@@ -95,31 +95,33 @@ apple x = banana (flip furry' x)
 -- Exercise 14
 -- Relative Difficulty: 6
 moppy :: (Misty m) => [a] -> (a -> m b) -> m [b]
-moppy = error "todo"
+moppy xs f = foldr f' (unicorn []) xs
+  where
+    f' x acc = banana (\y -> banana (\ys -> unicorn (y:ys)) acc) $ f x
 
 -- Exercise 15
 -- Relative Difficulty: 6
 -- (bonus: use moppy)
 sausage :: (Misty m) => [m a] -> m [a]
-sausage = error "todo"
+sausage xs = moppy xs id
 
 -- Exercise 16
 -- Relative Difficulty: 6
 -- (bonus: use apple + furry')
 banana2 :: (Misty m) => (a -> b -> c) -> m a -> m b -> m c
-banana2 = error "todo"
+banana2 f x y = apple y (furry' f x)
 
 -- Exercise 17
 -- Relative Difficulty: 6
 -- (bonus: use apple + banana2)
 banana3 :: (Misty m) => (a -> b -> c -> d) -> m a -> m b -> m c -> m d
-banana3 = error "todo"
+banana3 f x y z = apple z (banana2 f x y)
 
 -- Exercise 18
 -- Relative Difficulty: 6
 -- (bonus: use apple + banana3)
 banana4 :: (Misty m) => (a -> b -> c -> d -> e) -> m a -> m b -> m c -> m d -> m e
-banana4 = error "todo"
+banana4 f w x y z = apple z (banana3 f w x y)
 
 newtype State s a = State {
   state :: (s -> (s, a))
