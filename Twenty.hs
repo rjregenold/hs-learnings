@@ -59,26 +59,28 @@ instance Misty [] where
 -- Relative Difficulty: 2
 instance Misty Maybe where
   banana f (Just x) = f x
-  banana f _ = Nothing
+  banana _ _ = Nothing
   unicorn = Just
 
 -- Exercise 9
 -- Relative Difficulty: 6
 instance Misty ((->) t) where
-  banana = error "todo"
-  unicorn = error "todo"
+  banana f f' = \x -> f (f' x) x
+  unicorn = const
 
 -- Exercise 10
 -- Relative Difficulty: 6
 instance Misty (EitherLeft t) where
-  banana = error "todo"
-  unicorn = error "todo"
+  banana f (EitherLeft (Left x)) = f x
+  banana _ (EitherLeft (Right x)) = EitherLeft (Right x)
+  unicorn = EitherLeft . Left
 
 -- Exercise 11
 -- Relative Difficulty: 6
 instance Misty (EitherRight t) where
-  banana = error "todo"
-  unicorn = error "todo"
+  banana f (EitherRight (Right x)) = f x
+  banana _ (EitherRight (Left x)) = EitherRight (Left x)
+  unicorn = EitherRight . Right
 
 -- Exercise 12
 -- Relative Difficulty: 3
