@@ -85,12 +85,12 @@ instance Misty (EitherRight t) where
 -- Exercise 12
 -- Relative Difficulty: 3
 jellybean :: (Misty m) => m (m a) -> m a
-jellybean = error "todo"
+jellybean = banana id . furry' id
 
 -- Exercise 13
 -- Relative Difficulty: 6
 apple :: (Misty m) => m a -> m (a -> b) -> m b
-apple = error "todo"
+apple x = banana (flip furry' x)
 
 -- Exercise 14
 -- Relative Difficulty: 6
